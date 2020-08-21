@@ -1,0 +1,10 @@
+FROM continuumio/miniconda3:latest
+LABEL author="carisdak@hawaii.edu"
+
+RUN apt-get update && apt-get install -y procps git && apt-get clean -y
+
+COPY vibrant_env.yml /
+RUN conda env create -f /vibrant_env.yml && conda clean -a
+
+ENV PATH /opt/conda/envs/vibrant/bin:$PATH
+ENV PATH /opt/conda/envs/vibrant/share/vibrant-1.2.0/databases:$PATH

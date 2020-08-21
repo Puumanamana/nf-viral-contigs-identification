@@ -1,0 +1,9 @@
+FROM rocker/r-ubuntu:18.04
+LABEL author="carisdak@hawaii.edu"
+
+COPY VirFinder_1.1.tar.gz virfinder.R ./
+
+RUN Rscript -e "install.packages(c('BiocManager','glmnet','Rcpp'), dependencies=TRUE, repos='http://cran.rstudio.com/')"
+RUN Rscript -e "BiocManager::install(c('qvalue', 'Biostrings'))"
+RUN Rscript -e "install.packages('VirFinder_1.1.tar.gz', repos=NULL, type='source')"
+RUN mkdir /opt/R && mv virfinder.R /opt/R

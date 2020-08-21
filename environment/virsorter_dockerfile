@@ -1,0 +1,41 @@
+FROM continuumio/miniconda3:latest
+LABEL author="carisdak@hawaii.edu"
+
+RUN apt-get update && apt-get install -y procps git && apt-get clean -y
+
+COPY virsorter_env.yml /
+RUN conda env create -f /virsorter_env.yml && conda clean -a
+
+#=================================================#
+#================== Virsorter-dev ================#
+#=================================================#
+
+RUN apt-get install -y build-essential
+
+RUN git clone https://github.com/simroux/VirSorter.git \
+    && cd VirSorter/Scripts \
+    && make clean \
+    && make \
+    && cd ../.. \
+    && mv VirSorter/* /opt/conda/envs/virsorter/bin
+
+#=================================================#
+#================= Virsorter2-dev ================#
+#=================================================#
+
+RUN conda install -c bioconda -c conda-forge \
+    scikit-learn=0.22.1 \
+    imbalanced-learn \
+    pandas \
+    seaborn \
+    screed \
+    ruamel.yaml \
+    snakemake=5.16.0 \
+    click \
+    hmmer \
+    prodigal
+RUN git clone https://github.com/jiarong/VirSorter2.git \
+    && cd VirSorter2 \
+    && pip install .
+
+ENV PATH /opt/conda/envs/virsorter/bin:$PATH

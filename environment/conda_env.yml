@@ -1,0 +1,13 @@
+name: virus_extraction
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - python=3.7
+  - pigz=2.4
+  - biopython=1.77
+  - picard=2.23.3
+  - prodigal=2.6.3
+  - hmmer=3.3
+  

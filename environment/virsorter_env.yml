@@ -1,0 +1,28 @@
+name: virsorter
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - python=3.7
+  # VirSorter 1
+  - metagene_annotator
+  - mcl=14.137
+  - muscle
+  - blast
+  - perl-bioperl
+  - perl-file-which
+  - hmmer=3.3
+  - perl-parallel-forkmanager
+  - perl-list-moreutils
+  - diamond=0.9.14
+  - prodigal=2.6.3
+  # # In addition for VirSorter 2
+  # - scikit-learn=0.22.1
+  # - imbalanced-learn
+  # - pandas
+  # - seaborn
+  # - screed
+  # - ruamel.yaml
+  # - snakemake=5.16.0
+  # - click
